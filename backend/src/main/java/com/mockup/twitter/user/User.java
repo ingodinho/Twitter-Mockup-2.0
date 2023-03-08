@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table
+@Table(name = "users")
 public class User {
     @Id
     @SequenceGenerator(
@@ -31,6 +31,7 @@ public class User {
 
     // Constructor for Register
     public User(String username, String firstName, String lastName, String email, String password) {
+        System.out.println("HALLO BIST DU IN DIESEM CONSTRUCTOR????");
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -86,4 +87,15 @@ public class User {
         return email;
     }
 
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public String getPasswordSalt() {
+        return passwordSalt;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
 }
