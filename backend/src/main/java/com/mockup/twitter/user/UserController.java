@@ -1,5 +1,6 @@
 package com.mockup.twitter.user;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,12 +11,21 @@ import java.util.List;
 
 public class UserController {
 
+    private final UserService userService;
+
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping()
     public List<User> getAllUsers() {
-        return List.of(
-                new User(50L, "ingodinho", "ingo", "siemens", "ingo@email.de"),
-                new User(51L, "ingodinho123", "ingo123", "siemens123", "ingo123@email.de")
-        );
+        return userService.getAllUser();
+    }
+
+    @PostMapping("/new")
+    public User createUser(@RequestBody User user) {
+        return userService.addUser(user);
     }
 
 }
