@@ -19,8 +19,8 @@ public class UserService {
         this.hashingService = hashingService;
     }
 
-    public List<User> getAllUser() {
-        return userRepository.findAll();
+    public List<UserPublicInfo> getAllUser() {
+        return userRepository.findAllBy();
     }
 
     public User addUser(UserRegisterDTO userRegisterDTO) {
@@ -45,5 +45,14 @@ public class UserService {
         newUser.setPasswordHash(passwordHash);
 
         return userRepository.save(newUser);
+    }
+
+    public UserPublicInfo getUserById(String id) {
+        long userId = Long.parseLong(id);
+        Optional<UserPublicInfo> foundUser = this.userRepository.findUserById(userId);
+        if(foundUser.isEmpty()) {
+            throw new IllegalStateException("No User found");
+        }
+        return foundUser.get();
     }
 }

@@ -18,9 +18,14 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping()
-    public List<User> getAllUsers() {
+    @GetMapping("/all")
+    public List<UserPublicInfo> getAllUsers() {
         return userService.getAllUser();
+    }
+
+    @GetMapping()
+    public UserPublicInfo getUserById(@RequestParam String id){
+        return userService.getUserById(id);
     }
 
     @PostMapping("/new")
