@@ -1,6 +1,5 @@
 package com.mockup.twitter.user;
 
-import com.mockup.twitter.utils.HashingService;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -29,19 +28,11 @@ public class User {
 
     public User(){}
 
-    // Constructor for Register
-    public User(String username, String firstName, String lastName, String email, String password) {
-        System.out.println("HALLO BIST DU IN DIESEM CONSTRUCTOR????");
+    public User(String username, String firstName, String lastName, String email) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.createdAt = LocalDateTime.now();
-
-        HashingService hashingService = new HashingService();
-
-        this.passwordSalt = hashingService.createRandomHash();
-        this.passwordHash = hashingService.getHashString(password + passwordSalt);
     }
 
     public User(Long id, String username, String firstName, String lastName, String email) {
@@ -65,10 +56,6 @@ public class User {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getUsername() {
@@ -97,5 +84,37 @@ public class User {
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public void setPasswordSalt(String passwordSalt) {
+        this.passwordSalt = passwordSalt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }
